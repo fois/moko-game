@@ -298,3 +298,15 @@ textarea {
         page-break-after: avoid;
     }
 }
+
+#game {
+    width: 320px;
+    height: 240px;
+    background-color: #808080;
+}
+
+#draw {
+    width: 320px;
+    height: 240px;
+    background-color: #808080;
+}
