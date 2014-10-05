@@ -5,34 +5,70 @@
 * Time: 02:32 AM
 * To change this template use Tools | Templates.
 */
-function start() {
-    var canvas = document.getElementById("draw");
+var gameModule = (function() {
+    var ballX = 100
+      , ballY = 100
+      , ballR = 50;
 
-    var ctx = canvas.getContext("2d");
+    var maxWidth
+      , maxHeight
+      , maxR;
 
-    var background = Sizzle('#game')[0],
-        rect = background.getBoundingClientRect();
+    function start() {
+        var canvas = document.getElementById("draw");
 
-    canvas.width = rect.width;
-    canvas.height = rect.width;
+        var ctx = canvas.getContext("2d");
 
-    maxWidth = rect.width;
-    maxHeight = rect.height;
-    maxR = (rect.height > rect.width) ? rect.width / 2 : rect.height / 2;
+        var background = Sizzle('#game')[0],
+            rect = background.getBoundingClientRect();
 
-    ballX = Math.floor(Math.random() * maxWidth);
-    ballY = Math.floor(Math.random() * maxHeight);
-    ballR = Math.floor(Math.random() * maxR) + 30;
+        canvas.width = rect.width;
+        canvas.height = rect.width;
 
-    ctx.fillStyle = 'black';
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, ballR, 0, Math.PI * 2, true);
-    ctx.fill();
+        maxWidth = rect.width;
+        maxHeight = rect.height;
+        maxR = (rect.height > rect.width) ? rect.width / 2 : rect.height / 2;
 
-    document.getElementById("cover")
-            .addEventListener("click", touchEvent, false);
+        ballX = Math.floor(Math.random() * maxWidth);
+        ballY = Math.floor(Math.random() * maxHeight);
+        ballR = Math.floor(Math.random() * maxR) + 30;
 
-    console.log('Start Game');
-}
+        ctx.fillStyle = 'black';
+        ctx.beginPath();
+        ctx.arc(ballX, ballY, ballR, 0, Math.PI * 2, true);
+        ctx.fill();
+        
+        //document.getElementById("game").addEventListener("click", touchEvent, false);
+        //$('#game').on( "click", function(evt) { touchEvent(evt); });
+        $('#game').on( "tap", function(evt) { touchEvent(evt); });
+        console.log('Start Game');
+    }
 
-setInterval(function () { start() }, 1000);
+    function touchEvent(evt) {
+        console.log('clicked: ' + evt.clientX + " , " + evt.clientY);
+
+        var x1, 
+            x2,
+            y1,
+            y2;
+
+        // 四個角
+        x1 = ballX - ballR;
+        x2 = ballX + ballR;		
+        y1 = ballY - ballR;
+        y2 = ballY + ballR;	
+
+        // 是否擊中
+        if ((evt.clientX > x1) && (evt.clientX < x2)) {
+            if ((evt.clientY > y1) && (evt.clientY < y2)) {
+                $("#header").css('display', 'none');
+                $('#header').html('<h2>打到了</h2>');
+                $("#header").fadeIn(500);
+            }
+        }
+    }
+    
+    return {
+        gameStart: start
+    }
+}) ();

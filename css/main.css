@@ -300,13 +300,11 @@ textarea {
 }
 
 #game {
-    width: 320px;
-    height: 240px;
+    width: 100%/*400px/*100%*/;
+    height: 100%/*400px/*100%*/;
     background-color: #808080;
 }
 
 #draw {
-    width: 320px;
-    height: 240px;
     background-color: #808080;
 }
