@@ -13,6 +13,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="vendor/distrib-jquery-mobile/css/jquery.mobile.css">
         <link rel="stylesheet" href="css/main.css">
         
     </head>
@@ -22,13 +23,16 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div id="header">
-            
+    <div data-role="page">
+        <div id="header" data-role="header">
         </div>
         
-        <div id="game">
+        <div id="game" role="main" class="ui-content">
             <canvas id="draw"></canvas>
         </div>
+        
+        <div data-role="footer"></div>
+    </div>
         
         <script src="./js/modernizr.min.js"></script>
         <script src="./js/load.js?v=1.0"></script>
